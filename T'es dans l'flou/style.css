@@ -1,0 +1,176 @@
+/* CSS A GARDER POUR LA FENETRE POP-UP*/
+
+/* FENETRE POP-UP */
+.pop-up {
+	/* STYLE DE LA FENETRE */
+	color: #7B2292;
+	background-color: white;
+	border-radius: 50px;
+	text-align: center;
+	width: 20%;
+
+	font-family: 'Comic Helvetic Light';
+	display: flex;
+	flex-direction: column;
+	
+	/* POSITION DE LA FENETRE */
+	z-index: 10;
+	position: absolute;
+	left: 40%;
+}
+
+/*
+.pop-up div {
+	display: flex;
+	flex-direction: row;
+}
+*/
+
+/* Titre dans la fenetre pop-up */
+.pop-up h2{
+	color: #EE8100;
+	font-family: 'Comic Helvetic Heavy';
+}
+
+/* L'image du plat à trouver */
+.image-question{
+	max-width: 90%;
+	border-radius: 50px;
+	margin-bottom: 20%;
+}
+
+/*STYLE DES BOUTONS */
+/* La div contenant les bouttons quitter et jouer */
+.boutton-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin-top: 50%;
+	margin-bottom: 30px;
+}
+
+/*Style commun des boutons */
+.boutton {
+	font-family: 'Comic Helvetic Light';
+	color: white;
+	border: none;
+	border-radius:5px;
+	width: 20%;
+}
+
+.boutton:hover {
+	cursor: pointer;
+}
+
+/* Bouton quitter */
+.quitter {
+	background-color:#7B2292; 
+}
+
+/* Bouton jouer */
+.jouer {
+	background-color:#EE8100; 
+}
+
+
+
+
+/* CROIX DE LA FENETRE */
+.close {
+  width: 32px;
+  height: 32px;
+  opacity: 0.5;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  right: 30px;
+  top:20px;
+  content: ' ';
+  height: 25px;
+  width: 2px;
+  background-color: #EE8100;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+
+/* STYLE DE LA REPONSE */
+
+/*STYLE DE L'INPUT */
+/* Input */
+.answer {
+	border-radius: 15px;
+	border-color: #7B2292;
+	border-width: 1px;
+	
+}
+
+/* Placeholder */
+.answer, .answer::placeholder {
+	color: #7B2292;
+	text-align: center;
+	font-size: 105%;
+	font-family: 'Comic Helvetic Light';
+}
+
+/* Div contenant la fleche */
+.submit {
+	background-color: grey; /* Couleur à préciser ! */
+	border-radius: 50%;
+	width: 35px;
+	height: 35px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-left: 15px;
+	cursor: pointer;
+}
+
+.submit:hover {
+	background-color: #EE8100;
+}
+
+.submit img {
+	max-height: 25px;
+}
+
+/* DIV CONTENANT LE SUBMIT + LE INPUT */
+.input-submit{
+	display: flex;
+	flex-direction: row;
+	justify-content:center;
+	align-items: center;
+	margin: 20px;
+}
+
+
+/* Polices */
+@font-face {
+font-family: 'Comic Helvetic Light';
+font-style: normal;
+font-weight: normal;
+src: local('Comic Helvetic Light'), url('font/ComicHelvetic_Light.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Comic Helvetic Heavy';
+font-style: normal;
+font-weight: normal;
+src: local('Comic Helvetic Heavy'), url('font/ComicHelvetic_Heavy.woff') format('woff');
+}
+
+
+
+
+/* CSS TEST A ENLEVER */
+body {
+	background-color: grey;
+}
