@@ -1,0 +1,62 @@
+.nutri-score {
+	display: flex;
+	flex-direction: column;
+	width: 20%;
+	padding-left: 40%;
+}
+
+.nutri-score img#ruler {
+	max-width: 100%;
+}
+
+.score {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin-bottom: 15px;
+}
+
+
+
+/* Obsolete 
+.nutri-score {
+	display: flex;
+	flex-direction: row;
+	width: 50%;
+}
+
+.score {
+	width: 20%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+}
+
+.ruler {
+	border-bottom: solid;
+	border-width: 15px;
+	border-radius: 5px;
+	width: 100%;
+}
+
+#a {
+	border-color: #038141;
+}
+
+#b {
+	border-color: #85bb2f;
+}
+
+#c {
+	border-color: #fecb02;
+}
+
+#d {
+	border-color: #ee8100;
+}
+
+#e {
+	border-color: #e63e11;
+}
+*/
