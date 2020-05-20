@@ -133,16 +133,24 @@ function animation_nutriscore(object, ruler, cursor) {
                 
                 } else if (positionFinal==currentPosition) {
                     clearInterval(result);
+                    //save previous image's height
+                    var previousHeight = finalLetter.height;
+
                     //fill the letter
                     finalLetter.setAttribute('src', finalLetterParameter);
+                    var newHeight = finalLetter.height;
                     cursor.style.filter = 'blur(0px)';
+                    finalLetter.style.marginBottom = previousHeight-newHeight + 'px';
                     
+
+
                     //verify the cursor is i, the right spot
                     var cursorImage = 'img/Ellipse_' + object.nutriscore + '.png';
                     cursor.setAttribute('src', cursorImage);
                     
                     //make the letter flash
                     flashing_element(finalLetter);
+
                     
                 }
             
@@ -200,6 +208,7 @@ function flashing_element(element) {
         switch (time) {
             case 5:
                 element.style.transform = "scale(1.2)";
+                //element.style.marginBottom = -element.height/5 +'px';
                 break;            
             case 4:
                 element.style.transform = "scale(1)";
@@ -207,6 +216,7 @@ function flashing_element(element) {
                 break;
             case 3:
                 element.style.transform = "scale(1.3)";
+                //element.style.marginBottom = -element.height/3.33 +'px';
                 opacity = 100;
                 break;
             case 2:
@@ -215,6 +225,7 @@ function flashing_element(element) {
                 break;
             case 1:
                 element.style.transform = "scale(1.3)";
+                //element.style.marginBottom = -element.height/3.33 +'px';
                 opacity = 100;
                 break;
         }

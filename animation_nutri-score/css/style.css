@@ -1,8 +1,31 @@
+
+
 .nutri-score {
 	display: flex;
 	flex-direction: column;
 	width: 20%;
 	padding-left: 40%;
+}
+
+@media screen and (max-width: 767.98px){
+	.nutri-score {
+		width: 90%;
+		padding-left:5%;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 1224.98px){
+	.nutri-score {
+		width: 50%;
+		padding-left:25%;
+	}
+}
+
+@media screen and (min-width: 1225px) and (max-width: 1919.98px){
+	.nutri-score {
+		width: 25%;
+		padding-left:37.25%;
+	}
 }
 
 .nutri-score img#ruler {
