@@ -44,6 +44,7 @@ class Game {
 
   }
 
+  //Create pop-up windows
   create() {
   	
   	/* Pop-up window creation */
@@ -106,6 +107,7 @@ class Game {
 	this.listen();
   }
 
+  //Listen the buttons
   listen() {
   	var parent = this;
 	this.quit.onclick = function(){
@@ -135,6 +137,7 @@ class Game {
 	};
   }
 
+  //Clear / close the window
   clear() {
   	if (this.stockInterval !== undefined) {
   		clearInterval(this.stockInterval);
@@ -143,9 +146,42 @@ class Game {
   	this.window.remove();
   }
 
+  //Prevent the input to refresh the web page
+  preventDefaultForm(){	
+		function prevent(event) { 
+			event.preventDefault(); 
+		} 
+		this.form.addEventListener('submit', prevent);
+	}
+
+	//Chrono of the minigame
+	chrono() {
+		var time = this.timer;
+		//console.log(temps);
+		var chrono = this.timer.innerHTML;
+		var milli;
+		var secondes;
+		var minutes;
+
+		this.time = setInterval(function(){ 
+			 //Chronometre
+			 chrono++;
+			 milli = chrono%100;
+			 secondes = ((chrono-milli)/100)%60;
+
+			 minutes = Math.floor(((chrono-milli)/100)/60);
+			 time.innerHTML = minutes + ":" +secondes + ":" + milli;
+			 
+		}, 10);
+		
+	}
+
+
+	//T'es dans le flou mini-jeu
   flou(SRCimage, answer) {
+  	//To access to the object in intervals
   	var parent = this;
-  	/* UNE FONCTION CREATION POPUP EST PEUT ETRE NECESSAIRE */
+  	
 	var game = document.createElement('div');
 	game.setAttribute( 'class', 'game' );
 
@@ -158,7 +194,7 @@ class Game {
 	time.innerHTML = "0";
 	this.timer = time;
 
-	/* IMAGE A IMPORTER DE LA BD*/
+	/* IMAGE TO IMPORT FROM DB */
 	var picture = document.createElement('img');
 	picture.setAttribute( 'src', SRCimage );
 	picture.setAttribute( 'class', 'image-question' );
@@ -168,7 +204,7 @@ class Game {
 	picture.style.filter = "blur(15px)";
 	
 
-	/* PARTIE REPONSE */
+	/* RESPONSE PART */
 	//Formulaire 
 	var div = document.createElement('form');
 	div.setAttribute( 'class', 'input-submit' );
@@ -188,14 +224,15 @@ class Game {
 	submit.setAttribute( 'class', 'submit' );
 	submit.setAttribute( 'type', 'submit' );
 	
-	//Fleche dans le boutton
+	//Arrow in button
 	var arrow = document.createElement('img');
 	arrow.setAttribute( 'src', 'img/arrow.svg' );
 	submit.appendChild(arrow);
 	div.appendChild(this.input);
 	div.appendChild(submit);
 	this.form=div;
-	//Création des elements dans la page
+	
+	//Elements creation in page
 	game.appendChild(consignes);
 	game.appendChild(this.timer);
 	game.appendChild(picture);
@@ -209,7 +246,7 @@ class Game {
 	var parameter = 15;
 	var style = "max-width:90%;	border-radius:50px;	margin-bottom:20%;"
 	this.stockInterval = setInterval(function(){ 
-			 //Floutage
+			 //Blurry
 			 if (parameter>0) {
 			 	parameter-=0.5;
 			 	var flou = document.getElementsByClassName('image-question');
@@ -262,7 +299,7 @@ class Game {
 			score.style.flexDirection = "row";
 
 			var scoreImage = document.createElement("img");
-			scoreImage.setAttribute("src", "img/timer.svg");
+			scoreImage.setAttribute("src", "img/coins.svg");
 
 			var scoreValue = document.createElement("h3");
 			scoreValue.style.margin = "15px";
@@ -288,40 +325,44 @@ class Game {
 			parent.playWindow.remove();
 		} else {
 			input.value = "";
-			//ACTION A FAIRE SI L'USER S'EST TROMPE
-			//Mettre une croix sur l'image
+			input.placeholder = "Réessaie";
+			
+			var errorImage = document.createElement("img");
+			errorImage.setAttribute("src", "img/cross.svg");
+			errorImage.style.position = "absolute";
+			var question = document.getElementsByClassName('image-question');
+			errorImage.style.maxHeight = question[0].height-20 + "px";
+			errorImage.style.width = question[0].width/2 + "px";
+			errorImage.style.top = question[0].offsetTop + "px";
+			errorImage.style.left = question[0].offsetLeft + (question[0].width/2) - errorImage.style.width.replace('px','')/2 + "px";
+			
+			parent.window.appendChild(errorImage);
+			var opacity = 100;
+    		var time = 3;
+    		errorImage.style.transition =  "all 0.5s";
+    
+    		var flashing = setInterval(function() {
+       			if (time == 0) {
+           		 	clearInterval(flashing);
+        		}
+
+    			if (time%2==0 && time !=0 ) {
+    				opacity = 100;
+    			} else {
+    				opacity = 0;
+    			}
+
+
+        		errorImage.style.opacity = opacity + "%";
+        		console.log(errorImage.style.opacity);
+        		time--;
+
+    		}, 750)
 		}
 	
 	});
   }
 
-  	preventDefaultForm(){	
-		function prevent(event) { 
-			event.preventDefault(); 
-		} 
-		this.form.addEventListener('submit', prevent);
-	}
-
-	chrono() {
-		var time = this.timer;
-		//console.log(temps);
-		var chrono = this.timer.innerHTML;
-		var milli;
-		var secondes;
-		var minutes;
-
-		this.time = setInterval(function(){ 
-			 //Chronometre
-			 chrono++;
-			 milli = chrono%100;
-			 secondes = ((chrono-milli)/100)%60;
-
-			 minutes = Math.floor(((chrono-milli)/100)/60);
-			 time.innerHTML = minutes + ":" +secondes + ":" + milli;
-			 
-		}, 10);
-		
-	}
-
+  	
 }
 

@@ -137,7 +137,7 @@ function chrono() {
 		 var parametre = 30 - ((chrono-milli)/100);
 		 var flou = document.getElementsByClassName('image-question');
 
-		 flou[0].setAttribute( 'style', 'filter:blur('+parametre+'px);' );
+		 flou[0].setAttribute('style', 'filter:blur('+parametre+'px);');
 		
 
 
