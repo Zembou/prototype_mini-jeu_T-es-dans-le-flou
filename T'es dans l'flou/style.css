@@ -1,22 +1,23 @@
-/* CSS A GARDER POUR LA FENETRE POP-UP*/
+/* CSS TO KEEP*/
 
-/* FENETRE POP-UP */
+/* POP-UP WINDOW */
 .pop-up {
-	/* STYLE DE LA FENETRE */
+	/* WINDOW'S STYLE */
 	color: #7B2292;
 	background-color: white;
 	border-radius: 50px;
 	text-align: center;
-	width: 20%;
+	width: 33%;
+	//height: 80vh;
 
 	font-family: 'Comic Helvetic Light';
 	display: flex;
 	flex-direction: column;
 	
-	/* POSITION DE LA FENETRE */
+	/* WINDOW'S POSITION */
 	z-index: 10;
 	position: absolute;
-	left: 40%;
+	left: 33%;
 }
 
 /*
@@ -26,21 +27,16 @@
 }
 */
 
-/* Titre dans la fenetre pop-up */
-.pop-up h2{
+/* Title in pop-up */
+.pop-up h2, .pop-up h3{
 	color: #EE8100;
 	font-family: 'Comic Helvetic Heavy';
 }
 
-/* L'image du plat à trouver */
-.image-question{
-	max-width: 90%;
-	border-radius: 50px;
-	margin-bottom: 20%;
-}
+/* Meal's picture to find */
 
-/*STYLE DES BOUTONS */
-/* La div contenant les bouttons quitter et jouer */
+/* BUTTON STYLE */
+/* Div container */
 .boutton-container {
 	display: flex;
 	flex-direction: row;
@@ -49,25 +45,26 @@
 	margin-bottom: 30px;
 }
 
-/*Style commun des boutons */
+/* Common style */
 .boutton {
 	font-family: 'Comic Helvetic Light';
 	color: white;
 	border: none;
 	border-radius:5px;
 	width: 20%;
+	padding: 10px;
 }
 
 .boutton:hover {
 	cursor: pointer;
 }
 
-/* Bouton quitter */
+/* Quit button */
 .quitter {
 	background-color:#7B2292; 
 }
 
-/* Bouton jouer */
+/* Play button */
 .jouer {
 	background-color:#EE8100; 
 }
@@ -75,7 +72,7 @@
 
 
 
-/* CROIX DE LA FENETRE */
+/* Cross window */
 .close {
   width: 32px;
   height: 32px;
@@ -100,9 +97,9 @@
   transform: rotate(-45deg);
 }
 
-/* STYLE DE LA REPONSE */
+/* Answer's style */
 
-/*STYLE DE L'INPUT */
+/* Input's style */
 /* Input */
 .answer {
 	border-radius: 15px;
@@ -119,7 +116,7 @@
 	font-family: 'Comic Helvetic Light';
 }
 
-/* Div contenant la fleche */
+/* Div's arrow container */
 .submit {
 	background-color: grey; /* Couleur à préciser ! */
 	border-radius: 50%;
@@ -141,7 +138,7 @@
 	max-height: 25px;
 }
 
-/* DIV CONTENANT LE SUBMIT + LE INPUT */
+/* Div container submit + input */
 .input-submit{
 	display: flex;
 	flex-direction: row;
@@ -151,7 +148,7 @@
 }
 
 
-/* Polices */
+/* Fonts */
 @font-face {
 font-family: 'Comic Helvetic Light';
 font-style: normal;
@@ -168,9 +165,11 @@ src: local('Comic Helvetic Heavy'), url('font/ComicHelvetic_Heavy.woff') format(
 }
 
 
+.backgroundBlur {
+	/*filter: blur(50px);*/
+}
 
-
-/* CSS TEST A ENLEVER */
+/* CSS to leave */
 body {
 	background-color: grey;
 }
