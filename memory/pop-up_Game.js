@@ -1,20 +1,24 @@
 class Game {
   constructor(game) {
-    this.game = game;
-  	this.instruction;
-  	this.proposition;
-  	this.information = "Tu veux gagner plus de points ? Joue et essaie d'être la/le plus rapide ! Avec ces points, bénéficie de services";
-  	this.title;
-  	this.quit;
-  	this.cross;
-  	this.play;
-  	this.window;
-  	this.timer;
-  	this.time;
-  	this.stockInterval;
-  	this.form;
-  	this.input;
-  	this.playWindow;
+    /* PROPERTY USED FOR ALL GAMES */
+    this.game = game; //Game chosen
+  	this.instruction; //Instruction's game
+  	this.proposition; //Proposition to play the game
+  	this.information = "Tu veux gagner plus de points ? Joue et essaie d'être la/le plus rapide ! Avec ces points, bénéficie de services"; //What is this pop-up ?
+  	this.title; //Title of the window
+  	this.quit; //Quit button
+  	this.cross; //cross button
+  	this.play; //play button
+  	this.window; //Pop-up window
+  	this.timer; //Chrono's time
+  	this.time; //The chrono's setInterval
+  	this.playWindow; //The play div in the window
+
+  	/* PROPERTY NOT NECCESARRY USED */
+  	this.stockInterval; //A variable to stock another interval
+  	this.form; //A varialbe to stock a form
+  	this.input; //A varable to stock an input
+  	this.score; //A variable to stock a precise score
 
 
 
@@ -383,11 +387,17 @@ class Game {
 
 	var time = document.createElement('p');
 	time.setAttribute( 'class', 'temps' );
-	time.innerHTML = "0";
+	time.innerHTML = 0;
 	this.timer = time;
+
+	var score = document.createElement('p');
+	score.setAttribute( 'class', 'score' );
+	score.innerHTML = "0/10";
+	this.score = score;
 
 	game.appendChild(consignes);
 	game.appendChild(this.timer);
+	game.appendChild(this.score);
 	this.playWindow = game;
 	this.window.appendChild(this.playWindow);
 
@@ -463,55 +473,68 @@ class Game {
   	var allCards = this.window.querySelectorAll('.memory');
   	console.log(allCards);
   	var nbrCardReturned = 0;
-  	var cardReturned = []
+  	var cardReturned = [];
+  	var canClick = true;
+  	var pairFound = 0;
   	for (var elements of allCards) {
   		elements.addEventListener('click', function(){
   			var imgClicked = this;
   			imgClicked.style.transition = 'all 0.5s';
-  			if (nbrCardReturned <2) {
+  			if (canClick) {
+  				if (nbrCardReturned <2) {
   				
-  				for (var i = 0; i < stockMemory.length; i++) {
-  					if(stockMemory[i].balise.getAttribute('id') == imgClicked.getAttribute('id') ){
+  					for (var i = 0; i < stockMemory.length; i++) {
+  						if(stockMemory[i].balise.getAttribute('id') == imgClicked.getAttribute('id') && imgClicked.getAttribute('src') == dossier+derriere){
   					
   						
-  						if (stockMemory[cardReturned[nbrCardReturned-1]] == undefined || stockMemory[cardReturned[nbrCardReturned-1]].balise != imgClicked) {
-  							
-  							this.setAttribute('src', stockMemory[i].pair );
-  							cardReturned[nbrCardReturned] = stockMemory[i].balise.getAttribute('id');
-  							nbrCardReturned++;
+  							if (stockMemory[cardReturned[nbrCardReturned-1]] == undefined || stockMemory[cardReturned[nbrCardReturned-1]].balise != imgClicked) {
+  								
+  								this.setAttribute('src', stockMemory[i].pair );
+  								cardReturned[nbrCardReturned] = stockMemory[i].balise.getAttribute('id');
+  								nbrCardReturned++;
   						
-  						} else if (stockMemory[cardReturned[nbrCardReturned-1]].balise == imgClicked) {
-  							
-  							console.log("l'user a cliqué sur la meme carte");
+  							} 
   						
+  					
   						}
-  						
-  					
+  			
   					}
   			
-  				}
-  			
   				
-  			} else if (nbrCardReturned == 2) {
-  					
+  				} 
+  				if (nbrCardReturned == 2) {
+  					canClick = false;
 
 
   					if(stockMemory[cardReturned[0]].balise.getAttribute('src') == stockMemory[cardReturned[1]].balise.getAttribute('src')){
   						console.log('rajouter un point');
+  						pairFound++;
+
+  						parent.score.innerHTML = pairFound + "/10";
+  						canClick = true;
   						
   					} else {
+  						setTimeout(function(){
+  							stockMemory[cardReturned[0]].balise.setAttribute('src', dossier+derriere);
+  							stockMemory[cardReturned[1]].balise.setAttribute('src', dossier+derriere);
+  							canClick = true;
+  						},500);
   						
-  						stockMemory[cardReturned[0]].balise.setAttribute('src', dossier+derriere);
-  						stockMemory[cardReturned[1]].balise.setAttribute('src', dossier+derriere);
   						
   						
   					}
   			
   				
-  				nbrCardReturned = 0;
+  					nbrCardReturned = 0;
 
 
+  				}
+
+  				if (pairFound == 10) {
+  					parent.victory();
+  				}
   			}
+  			
   		});
   	}
   	this.timer_up();
