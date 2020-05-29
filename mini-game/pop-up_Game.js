@@ -378,6 +378,7 @@ class Game {
   	//To access to the object in intervals
   	var parent = this;
   	
+	//Creation of the play game
 	var game = document.createElement('div');
 	game.setAttribute( 'class', 'game' );
 
@@ -402,6 +403,9 @@ class Game {
 	this.window.appendChild(this.playWindow);
 
 	//Image selection
+	/* FUTURE DB'S LINK */
+	console.log("Change db's link here");
+
 	var dossier = "imgmemory/";
 	var jpg = ".jpg";
 	var png = ".png";
@@ -438,10 +442,11 @@ class Game {
 		stockLink.push(img);
 
 	}
-	console.log(stockLink);
+	
+	/* WHEN ALL PICTURES ARE STOCKED */
 	for (var i = 0; i < stockLink.length; i++) {
 		
-		
+		//Chose a random number to randomize the memory's card order
 		do {
 			var random = Math.floor(Math.random()*20);
 			
@@ -452,14 +457,17 @@ class Game {
 			
 		} while(stockOrder[i] == undefined);
 
+		//PLace an image
 		imgHTML = document.createElement('img');
 		imgHTML.setAttribute( 'src', dossier+derriere );
 		imgHTML.setAttribute( 'class', 'memory' );
 		imgHTML.setAttribute( 'id', i );
-		imgHTML.style.maxWidth = "15%";
+		imgHTML.style.maxWidth = "20%";
 		imgHTML.style.borderRadius = "25%";
 		imgHTML.style.margin = "2.5%";
 		imgHTML.style.cursor = "pointer";
+		
+		//Stock its value
 		stockCard = {
 			balise : imgHTML,
 			pair : stockLink[random],
@@ -469,26 +477,31 @@ class Game {
 
 	}
   	
-  	
+  	//Add an event listener on all cards
   	var allCards = this.window.querySelectorAll('.memory');
-  	console.log(allCards);
-  	var nbrCardReturned = 0;
-  	var cardReturned = [];
-  	var canClick = true;
+  	
+  	var nbrCardReturned = 0; //Number of card turned over
+  	var cardReturned = []; //Value of the cards turned over
+  	var canClick = true; //Allows the user to click
   	var pairFound = 0;
+
   	for (var elements of allCards) {
   		elements.addEventListener('click', function(){
   			var imgClicked = this;
   			imgClicked.style.transition = 'all 0.5s';
   			if (canClick) {
-  				if (nbrCardReturned <2) {
   				
+  				if (nbrCardReturned <2) {
+  					
+  					//Find the cards's value
   					for (var i = 0; i < stockMemory.length; i++) {
+  						//If the card clicked is the same that the card crossed by the for loop, and it's a card not turned over yet
   						if(stockMemory[i].balise.getAttribute('id') == imgClicked.getAttribute('id') && imgClicked.getAttribute('src') == dossier+derriere){
   					
-  						
+  							//If it's not the card already turned over
   							if (stockMemory[cardReturned[nbrCardReturned-1]] == undefined || stockMemory[cardReturned[nbrCardReturned-1]].balise != imgClicked) {
   								
+  								//Turn over the card
   								this.setAttribute('src', stockMemory[i].pair );
   								cardReturned[nbrCardReturned] = stockMemory[i].balise.getAttribute('id');
   								nbrCardReturned++;
@@ -502,18 +515,20 @@ class Game {
   			
   				
   				} 
+
+
   				if (nbrCardReturned == 2) {
   					canClick = false;
 
 
   					if(stockMemory[cardReturned[0]].balise.getAttribute('src') == stockMemory[cardReturned[1]].balise.getAttribute('src')){
-  						console.log('rajouter un point');
   						pairFound++;
 
   						parent.score.innerHTML = pairFound + "/10";
   						canClick = true;
   						
   					} else {
+  						//To let the user see the cards
   						setTimeout(function(){
   							stockMemory[cardReturned[0]].balise.setAttribute('src', dossier+derriere);
   							stockMemory[cardReturned[1]].balise.setAttribute('src', dossier+derriere);
