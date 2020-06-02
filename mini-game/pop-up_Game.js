@@ -111,7 +111,7 @@ class Game {
 	this.listen();
   }
 
-  //Listen the buttons
+  //Listen the button
   listen() {
   	var parent = this;
 	this.quit.onclick = function(){
@@ -403,9 +403,6 @@ class Game {
 	this.window.appendChild(this.playWindow);
 
 	//Image selection
-	/* FUTURE DB'S LINK */
-	console.log("Change db's link here");
-
 	var dossier = "imgmemory/";
 	var jpg = ".jpg";
 	var png = ".png";
@@ -417,6 +414,8 @@ class Game {
 	var img;
 	var imgHTML;
 	var canPush;
+	/* WITHOUT DB'S LINK */
+	console.log("Change db's link here");
 	for (var i = 0; i < 10; i++) {
 		
 		do {
@@ -442,6 +441,26 @@ class Game {
 		stockLink.push(img);
 
 	}
+
+	/* WITH DB'S LINK */
+	/* for (var i = 0; i < 10; i++) {
+		
+		do {
+			Select img in DB
+
+
+			
+			if (stockLink.includes(img) != true) {
+				canPush = true;
+			} else {
+				canPush = false;
+			}
+
+		} while (canPush == false);
+		stockLink.push(img);
+		stockLink.push(img);
+
+	} */
 	
 	/* WHEN ALL PICTURES ARE STOCKED */
 	for (var i = 0; i < stockLink.length; i++) {

@@ -1,0 +1,140 @@
+﻿Game
++game (string)
++instruction (string)
++proposition (string)
++information (string)
++title (string)
++quit (html element)
++cross (html element)
++play (html element)
++window (html element)
++timer (string)
++time (setInterval)
+
+
++stockInterval (setInterval)
++form (html element)
++input (html element)
++score (string)
+
+
++create()
++listen()
++clear()
++preventDefaultForm
++timer_up
++victory
++flou
++memory
+	
+
+Properties
+
+game
+Game’s name
+
+
+Instruction
+Game’s intruction
+
+
+proposition
+Proposition to play the game.
+
+
+Information
+Explains what is this pop-up window
+
+
+Title
+Window’s title
+
+
+Quit
+Property to stock the quit button
+
+
+Cross
+Property to stock the cross button
+
+
+Play
+Property to stock the play button
+
+
+Window
+Property to stock the pop-up window
+
+
+Timer
+Property to stock the chrono’s time
+
+
+Time
+Property to stock the setInterval’s chrono
+
+
+playWindow
+Property to stock the play div in the pop-up
+
+
+stockInterval
+Property to stock an additional stockInterval
+
+
+form
+Property to stock a form
+
+
+input
+Property to stock an input
+
+
+score
+Property to stock a precise score
+
+
+Methods
+
+
+constructor
+Needs one argument (to define the game)
+Build the object, define the game, title and instruction, create the play windows
+
+When you create a new game, don’t forget to add an elseif condition 
+  
+
+
+
+create
+Creates the pop-up window
+(called in the constructor)
+
+listen
+Adds eventListener on all the button (play, quit and cross)
+(called in the create method)
+
+Clear
+Clear the window and the setInterval
+(called in the listen method)
+
+PreventDefaultForm
+Prevent the input to refresh the web page
+(called when an input is needed in a mini-game. current game : flou)
+You need to stock the input in the Game object “input” property
+
+timer_up
+Timer of the mini-game, count up and not count down
+(called if you need a count up timer in a mini-game)
+
+victory
+To call when the user wins the mini-game.
+Create the victory div
+
+
+flou
+“T’es dans l’flou” mini-game
+
+
+memory
+“Memory” mini-game
