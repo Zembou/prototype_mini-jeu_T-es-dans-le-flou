@@ -12,6 +12,9 @@ class Game {
   	this.window; //Pop-up window
   	this.timer; //Chrono's time
   	this.time; //The chrono's setInterval
+  	this.slider;
+  	this.difficultyText;
+  	this.difficulty;
   	this.playWindow; //The play div in the window
 
   	/* PROPERTY NOT NECCESARRY USED */
@@ -24,11 +27,11 @@ class Game {
 
     if (this.game == "flou") {
     	this.title = "T'es dans l'flou";
-    	this.instruction = "Devine le plus rapidement possible quel plat se trouve derrière cette image"
+    	this.instruction = "Devine le plus rapidement possible quel plat se trouve derrière ces images"
     	
     } else if (this.game == "memory") {
     	this.title = "Memory";
-    	this.instruction = "Associe les images par paires"
+    	this.instruction = "Trouve le plus de paires possible !"
     } else {
     	this.title = "Titre du jeu : " + this.game;
     	console.log("debugging instruction : modify the class's constructor");
@@ -80,6 +83,17 @@ class Game {
 	proposition_text.innerHTML = this.information;
 	proposition_div.appendChild(proposition_text);
 
+	/* Slider */
+	var slider = document.createElement('input');
+	slider.setAttribute('type', 'range');
+	slider.setAttribute('min', '1');
+	slider.setAttribute('max', '3');
+	this.slider = slider;
+
+	var difficultyText = document.createElement('p');
+	difficultyText.innerHTML = 'Le jeu durera ' + slider.value + ' minutes';
+	this.difficultyText = difficultyText;
+
 	/* Button container */
 	var button_div = document.createElement('div');
 	button_div.setAttribute( 'class', 'boutton-container' );
@@ -101,6 +115,8 @@ class Game {
 
 	button_div.appendChild(this.quit);
 	button_div.appendChild(this.play);
+	proposition_div.appendChild(this.difficultyText);
+	proposition_div.appendChild(this.slider);
 	proposition_div.appendChild(button_div);
 	this.proposition=proposition_div;
 	pop_up.appendChild(this.proposition);
@@ -123,16 +139,25 @@ class Game {
 		parent.clear();
 	};
 
+	this.slider.onchange = function(){
+		var min;
+		if (this.value>1) {
+			min = ' minutes'
+		} else {
+			min = ' minute'
+		}
+		parent.difficultyText.innerHTML = 'Le jeu durera ' + this.value + min;
+	}
 	
 	this.play.onclick = function(){
 		parent.proposition.remove();
-		
-		
+		parent.difficulty = parent.slider.value;
+		var difficulty = parent.difficulty;
 		if (parent.game == "flou") {
 			console.log("Database link");
-			parent.flou('img/exemple.jpg', 'test');
+			parent.flou(difficulty);
 		} else if (parent.game == "memory") {
-			parent.memory();
+			parent.memory(difficulty);
 		} else {
 			console.log("Debugging : modify the class execution");
 		}
@@ -270,7 +295,7 @@ class Game {
 	}
 
 	//T'es dans le flou mini-jeu
-  flou() {
+  flou(difficulty) {
   	//To access to the object in intervals
   	var parent = this;
   	
@@ -439,7 +464,7 @@ class Game {
 			 
 			 
 		}, 1000);
-	this.timer_down(0.5, parent.score);
+	this.timer_down(difficulty, parent.score);
 	
 	var score = 0;
 	var buttons = [];
@@ -581,7 +606,7 @@ class Game {
 	
   }
 
-  memory() {
+  memory(difficulty) {
   	//To access to the object in intervals
   	var parent = this;
   	
@@ -908,7 +933,7 @@ class Game {
 
   		})
   	
-  	this.timer_down(3, parent.score);
+  	this.timer_down(difficulty, parent.score);
   
   }
   	
